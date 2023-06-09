@@ -10,6 +10,7 @@ namespace EasyCashIdentity.EntityLayer.Concrete
         public string Surname { get; set; }
         public string District { get; set; }
         public string City { get; set; }
+        public int ConfirmCode { get; set; }
         public bool Status { get; set; }
 
         #region Table relationship

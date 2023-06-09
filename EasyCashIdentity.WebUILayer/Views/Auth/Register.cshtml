@@ -1,0 +1,36 @@
+﻿@model AppUserRegisterDto
+@{
+    ViewData["Title"] = "Kayıt Ol";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<h1>Easy Cash Kayıt Formu</h1>
+<div class="w3layoutscontaineragileits">
+    <h2>Yeni Müşteri</h2>
+    <form asp-action="Register" method="post">
+        <span class="text-white" asp-validation-for="Name"></span>
+        <input type="text" asp-for="Name" placeholder="Adınızı Giriniz" autocomplete="off" />
+        <br /><span class="text-white" asp-validation-for="Surname"></span>
+        <input type="text" asp-for="Surname" placeholder="Soyadınızı Giriniz" autocomplete="off" />
+        <br /><span class="text-white" asp-validation-for="Username"></span>
+        <input type="text" asp-for="Username" placeholder="Kullanıcı Adınızı Giriniz" autocomplete="off" />
+        <br /><span class="text-white" asp-validation-for="Email"></span>
+        <input type="text" asp-for="Email" placeholder="Mail Adresinizi Giriniz" autocomplete="off" />
+        <br /><span class="text-white" asp-validation-for="Password"></span>
+        <input type="password" asp-for="Password" placeholder="Şifrenizi Giriniz" autocomplete="off" />
+        <br /><span class="text-white" asp-validation-for="ConfirmPassword"></span>
+        <input type="password" asp-for="ConfirmPassword" placeholder="Şifrenizi Tekrar Giriniz" autocomplete="off" />
+        <div class="text-white" asp-validation-summary="ModelOnly"></div>
+        <br /><br />
+        <ul class="agileinfotickwthree">
+            <li>
+                <input type="checkbox" id="brand1" value="" />
+                <label for="brand1"><span></span>Şartları okudum, onaylıyorum</label>
+                <a href="/Auth/Login">Geri Dön</a>
+            </li>
+        </ul>
+        <div class="aitssendbuttonw3ls">
+            <input type="submit" value="Kayıt Ol" />
+        </div>
+    </form>
+</div>

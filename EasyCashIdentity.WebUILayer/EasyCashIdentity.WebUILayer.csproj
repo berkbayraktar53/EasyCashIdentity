@@ -25,13 +25,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.16" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.16">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
+	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+	  <PackageReference Include="NToastNotify" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\EasyCashIdentity.BusinessLayer\EasyCashIdentity.BusinessLayer.csproj" />
 	  <ProjectReference Include="..\EasyCashIdentity.DataAccessLayer\EasyCashIdentity.DataAccessLayer.csproj" />
 	</ItemGroup>
 

@@ -1,0 +1,19 @@
+﻿@model ConfirmEmailDto
+@{
+    ViewData["Title"] = "Mail Doğrula";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<h1>Easy Cash Mail Onayı</h1>
+<div class="w3layoutscontaineragileits">
+    <h2>Mail Adresinize Gelen 6 Haneli Kodu Giriniz</h2>
+    <form asp-action="ConfirmMail" method="post">
+        <input type="hidden" name="Email" value="@ViewBag.userEmail" />
+        <input type="text" asp-for="ConfirmCode" placeholder="Onay Kodunu Giriniz" required autocomplete="off" />
+        <div class="text-white" asp-validation-summary="ModelOnly"></div>
+        <br /><br />
+        <div class="aitssendbuttonw3ls">
+            <input type="submit" value="Gönder" />
+        </div>
+    </form>
+</div>

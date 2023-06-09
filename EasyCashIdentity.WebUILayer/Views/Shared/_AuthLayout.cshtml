@@ -1,0 +1,12 @@
+﻿<!doctype html>
+<html lang="tr">
+<head>
+    @await Html.PartialAsync("~/Views/Shared/_AuthLayoutPartial/_HeaderPartial.cshtml")
+</head>
+<body>
+    @RenderBody()
+    @await Html.PartialAsync("~/Views/Shared/_AuthLayoutPartial/_FooterPartial.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/_AuthLayoutPartial/_ScriptPartial.cshtml")
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>
