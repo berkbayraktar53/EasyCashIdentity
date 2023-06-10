@@ -7,10 +7,11 @@ namespace EasyCashIdentity.BusinessLayer.Concrete
     public class UserManager : IUserService
     {
         private readonly UserManager<AppUser> _userManager;
-
-        public UserManager(UserManager<AppUser> userManager)
+        private readonly SignInManager<AppUser> _signInManager;
+        public UserManager(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public Task<IdentityResult> CreateAsync(AppUser appUser, string password)
@@ -26,6 +27,11 @@ namespace EasyCashIdentity.BusinessLayer.Concrete
         public Task<IdentityResult> UpdateAsync(AppUser appUser)
         {
             return _userManager.UpdateAsync(appUser);
+        }
+
+        public Task<SignInResult> PasswordSignInAsync(string email, string password, bool isPersistent, bool lockoutOnFailure)
+        {
+            return _signInManager.PasswordSignInAsync(email, password, isPersistent, lockoutOnFailure);
         }
     }
 }

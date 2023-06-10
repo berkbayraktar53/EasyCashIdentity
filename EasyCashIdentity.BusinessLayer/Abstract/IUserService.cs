@@ -8,5 +8,6 @@ namespace EasyCashIdentity.BusinessLayer.Abstract
         Task<AppUser> FindByEmailAsync(string email);
         Task<IdentityResult> UpdateAsync(AppUser appUser);
         Task<IdentityResult> CreateAsync(AppUser appUser, string password);
+        Task<SignInResult> PasswordSignInAsync(string email, string password, bool isPersistent, bool lockoutOnFailure);
     }
 }

@@ -27,6 +27,7 @@ namespace EasyCashIdentity.BusinessLayer.ValidationRules.FluentValidation
             RuleFor(p => p.Password).NotEmpty().WithMessage("Lütfen şifrenizi giriniz");
             RuleFor(p => p.Password).MinimumLength(3).WithMessage("Lütfen en az 3 karakter veri girişi yapın");
             RuleFor(p => p.Password).MaximumLength(30).WithMessage("Lütfen en fazla 30 karakter veri girişi yapın");
+            RuleFor(p => p.Password).Equal(p => p.ConfirmPassword).WithMessage("Şifreler birbiriyle eşleşmiyor");
 
             RuleFor(p => p.ConfirmPassword).NotEmpty().WithMessage("Lütfen şifrenizi tekrar giriniz");
             RuleFor(p => p.ConfirmPassword).MinimumLength(3).WithMessage("Lütfen en az 3 karakter veri girişi yapın");

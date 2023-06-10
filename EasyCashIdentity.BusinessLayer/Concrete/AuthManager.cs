@@ -31,6 +31,20 @@ namespace EasyCashIdentity.BusinessLayer.Concrete
             return null;
         }
 
+        public async Task<SignInResult> Login(string email, string password, bool isPersistent, bool lockoutOnFailure)
+        {
+            var result = await _userService.PasswordSignInAsync(email, password, isPersistent, lockoutOnFailure);
+            if (result.Succeeded)
+            {
+                var user = await _userService.FindByEmailAsync(email);
+                if (user.EmailConfirmed)
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
         public async Task<IdentityResult> Register(AppUserRegisterDto appUserRegisterDto, string password)
         {
             Random random = new();
