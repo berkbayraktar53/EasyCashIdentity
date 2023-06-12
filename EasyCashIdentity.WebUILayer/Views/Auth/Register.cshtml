@@ -1,25 +1,23 @@
-﻿@model AppUserRegisterDto
+﻿@model UserForRegisterDto
 @{
     ViewData["Title"] = "Kayıt Ol";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
-<h1>Easy Cash Kayıt Formu</h1>
+<br /><br /><br />
 <div class="w3layoutscontaineragileits">
-    <h2>Yeni Müşteri</h2>
+    <h2>Hesap Oluştur</h2>
     <form asp-action="Register" method="post">
         <span class="text-white" asp-validation-for="Name"></span>
         <input type="text" asp-for="Name" placeholder="Adınız" autocomplete="off" />
         <br /><span class="text-white" asp-validation-for="Surname"></span>
         <input type="text" asp-for="Surname" placeholder="Soyadınız" autocomplete="off" />
-        <br /><span class="text-white" asp-validation-for="Username"></span>
-        <input type="text" asp-for="Username" placeholder="Kullanıcı adınız" autocomplete="off" />
         <br /><span class="text-white" asp-validation-for="Email"></span>
-        <input type="text" asp-for="Email" placeholder="Email adresiniz" autocomplete="off" />
+        <input type="text" asp-for="Email" placeholder="Mail adresiniz" autocomplete="off" />
         <br /><span class="text-white" asp-validation-for="Password"></span>
         <input type="password" asp-for="Password" placeholder="Şifreniz" autocomplete="off" />
         <br /><span class="text-white" asp-validation-for="ConfirmPassword"></span>
-        <input type="password" asp-for="ConfirmPassword" placeholder="Şifre tekrar" autocomplete="off" />
+        <input type="password" asp-for="ConfirmPassword" placeholder="Şifreniz tekrar" autocomplete="off" />
         <div class="text-white" asp-validation-summary="ModelOnly"></div>
         <br /><br />
         <ul class="agileinfotickwthree">

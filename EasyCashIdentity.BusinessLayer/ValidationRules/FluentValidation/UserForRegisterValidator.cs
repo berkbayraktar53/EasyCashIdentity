@@ -3,9 +3,9 @@ using EasyCashIdentity.EntityLayer.Dtos;
 
 namespace EasyCashIdentity.BusinessLayer.ValidationRules.FluentValidation
 {
-    public class AppUserRegisterValidator : AbstractValidator<AppUserRegisterDto>
+    public class UserForRegisterValidator : AbstractValidator<UserForRegisterDto>
     {
-        public AppUserRegisterValidator()
+        public UserForRegisterValidator()
         {
             RuleFor(p => p.Name).NotEmpty().WithMessage("Lütfen adınızı giriniz");
             RuleFor(p => p.Name).MinimumLength(3).WithMessage("Lütfen en az 3 karakter veri girişi yapın");
@@ -15,11 +15,7 @@ namespace EasyCashIdentity.BusinessLayer.ValidationRules.FluentValidation
             RuleFor(p => p.Surname).MinimumLength(3).WithMessage("Lütfen en az 3 karakter veri girişi yapın");
             RuleFor(p => p.Surname).MaximumLength(30).WithMessage("Lütfen en fazla 30 karakter veri girişi yapın");
 
-            RuleFor(p => p.Username).NotEmpty().WithMessage("Lütfen kullanıcı adınızı giriniz");
-            RuleFor(p => p.Username).MinimumLength(3).WithMessage("Lütfen en az 3 karakter veri girişi yapın");
-            RuleFor(p => p.Username).MaximumLength(30).WithMessage("Lütfen en fazla 30 karakter veri girişi yapın");
-
-            RuleFor(p => p.Email).NotEmpty().WithMessage("Lütfen email adresinizi giriniz");
+            RuleFor(p => p.Email).NotEmpty().WithMessage("Lütfen mail adresinizi giriniz");
             RuleFor(p => p.Email).MinimumLength(3).WithMessage("Lütfen en az 3 karakter veri girişi yapın");
             RuleFor(p => p.Email).MaximumLength(30).WithMessage("Lütfen en fazla 30 karakter veri girişi yapın");
             RuleFor(p => p.Email).EmailAddress().WithMessage("Lütfen geçerli bir mail adresi giriniz");

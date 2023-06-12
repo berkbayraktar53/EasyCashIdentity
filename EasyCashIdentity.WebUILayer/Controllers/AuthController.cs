@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using EasyCashIdentity.EntityLayer.Dtos;
 using EasyCashIdentity.BusinessLayer.Abstract;
 using EasyCashIdentity.BusinessLayer.ValidationRules.FluentValidation;
-using Microsoft.AspNetCore.Identity;
-using EasyCashIdentity.BusinessLayer.Concrete;
 
 namespace EasyCashIdentity.WebUILayer.Controllers
 {
@@ -29,14 +27,27 @@ namespace EasyCashIdentity.WebUILayer.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var result = await _authService.Login(userForLoginDto.Email, userForLoginDto.Password, false, true);
-            if (result.Succeeded)
+            UserForLoginValidator userForLoginValidator = new();
+            ValidationResult validationResult = userForLoginValidator.Validate(userForLoginDto);
+            if (validationResult.IsValid)
             {
-                _toastNotification.AddSuccessToastMessage("Giriş başarılı");
-                return RedirectToAction("Index", "MyAccounts");
+                var result = await _authService.Login(userForLoginDto.Email, userForLoginDto.Password, false, true);
+                if (result != null)
+                {
+                    _toastNotification.AddSuccessToastMessage("Giriş başarılı");
+                    return RedirectToAction("Index", "MyAccounts");
+                }
+                _toastNotification.AddErrorToastMessage("Kullanıcı adı veya şifre hatalı");
+                return View(userForLoginDto);
             }
-            _toastNotification.AddErrorToastMessage("Kullanıcı adı veya şifre hatalı");
-            return View();
+            else
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View(userForLoginDto);
         }
 
         [HttpGet]
@@ -46,9 +57,9 @@ namespace EasyCashIdentity.WebUILayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(AppUserRegisterDto appUserRegisterDto)
+        public async Task<IActionResult> Register(UserForRegisterDto appUserRegisterDto)
         {
-            AppUserRegisterValidator appUserRegisterValidator = new();
+            UserForRegisterValidator appUserRegisterValidator = new();
             ValidationResult validationResult = appUserRegisterValidator.Validate(appUserRegisterDto);
             if (validationResult.IsValid)
             {
@@ -57,9 +68,12 @@ namespace EasyCashIdentity.WebUILayer.Controllers
                 {
                     TempData["UserEmail"] = appUserRegisterDto.Email;
                     _toastNotification.AddInfoToastMessage("Mail adresinize gelen 6 haneli kodu giriniz");
-                    return RedirectToAction("ConfirmMail", "Auth");
                 }
-                _toastNotification.AddErrorToastMessage("Onay kodu gönderilemedi");
+                else
+                {
+                    _toastNotification.AddErrorToastMessage("Onay kodu gönderilemedi");
+                }
+                return RedirectToAction("ConfirmMail", "Auth");
             }
             else
             {
@@ -86,10 +100,12 @@ namespace EasyCashIdentity.WebUILayer.Controllers
             if (user != null)
             {
                 _toastNotification.AddSuccessToastMessage("Başarılı bir şekilde kayıt oldunuz");
-                return RedirectToAction("Login", "Auth");
             }
-            _toastNotification.AddErrorToastMessage("Onay kodu gönderilemedi");
-            return View();
+            else
+            {
+                _toastNotification.AddErrorToastMessage("Onay kodu gönderilemedi");
+            }
+            return RedirectToAction("Login", "Auth");
         }
     }
 }

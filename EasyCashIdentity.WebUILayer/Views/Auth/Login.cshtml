@@ -1,0 +1,28 @@
+﻿@model UserForLoginDto
+@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<br /><br /><br />
+<div class="w3layoutscontaineragileits">
+    <h2>Giriş Paneli</h2>
+    <form asp-action="Login" method="post">
+        <br /><span class="text-white" asp-validation-for="Email"></span>
+        <input type="text" asp-for="Email" placeholder="Mail adresiniz" autocomplete="off" />
+        <br /><span class="text-white" asp-validation-for="Password"></span>
+        <input type="password" asp-for="Password" placeholder="Şifreniz" autocomplete="off" />
+        <br /><br />
+        <ul class="agileinfotickwthree">
+            <li>
+                <input type="checkbox" id="brand1" value="" />
+                <label for="brand1"><span></span>Beni Hatırla</label>
+                <a href="/Auth/ForgotPassword">Şifremi Unuttum</a>
+                <a href="/Auth/Register">Hesap Oluştur</a>
+            </li>
+        </ul>
+        <div class="aitssendbuttonw3ls">
+            <input type="submit" value="Giriş Yap" />
+        </div>
+    </form>
+</div>

@@ -45,7 +45,7 @@ namespace EasyCashIdentity.BusinessLayer.Concrete
             return null;
         }
 
-        public async Task<IdentityResult> Register(AppUserRegisterDto appUserRegisterDto, string password)
+        public async Task<IdentityResult> Register(UserForRegisterDto appUserRegisterDto, string password)
         {
             Random random = new();
             int confirmCode = random.Next(100000, 1000000);
@@ -53,7 +53,7 @@ namespace EasyCashIdentity.BusinessLayer.Concrete
             {
                 Name = appUserRegisterDto.Name,
                 Surname = appUserRegisterDto.Surname,
-                UserName = appUserRegisterDto.Username,
+                UserName = appUserRegisterDto.Email,
                 Email = appUserRegisterDto.Email,
                 ConfirmCode = confirmCode,
                 Status = true
